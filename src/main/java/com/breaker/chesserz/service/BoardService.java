@@ -5,6 +5,7 @@ import com.breaker.chesserz.dto.MoveDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -28,6 +29,11 @@ public class BoardService {
         logger.info("Amount of games created: {}.", chessBoards.size());
     }
 
+//    @Scheduled(fixedRate = 10000)
+//    public void boardState() {
+//        System.out.println(chessBoards.get(0).getFEN());
+//    }
+
     public String makeMove(MoveDTO moveDTO) {
         logger.info("Making a move.");
 
@@ -39,6 +45,8 @@ public class BoardService {
     }
 
     private void handleMove(String from, String to) {
+        ChessBoard currentBoard = chessBoards.get(0);
+
         try {
             String[] fromSplit = from.split("");
             String[] toSplit = to.split("");
@@ -47,14 +55,25 @@ public class BoardService {
             int fromY = StringToInt(fromSplit[0]);
             int toX = Integer.parseInt(toSplit[1]) - 1;
             int toY = StringToInt(toSplit[0]);
-            chessBoards.get(0).movePiece(fromX, fromY, toX, toY); //TODO: get chessboard by address combination
 
-            chessBoards.get(0).printBoard();
+            // TODO: Check if fromX and fromY are valid
+
+            currentBoard.movePiece(fromX, fromY, toX, toY); //TODO: get chessboard by address combination
+
+            currentBoard.setWhite_turn(!currentBoard.isWhite_turn());
+
+            System.out.println(currentBoard.getFEN());
         } catch (Exception ex) {
             logger.error(ex.getMessage());
         }
     }
 
+    /**
+     * Converts a string coordinate to an int coordinate.
+     * @param toTransform The string coordinate to convert.
+     * @return The int coordinate.
+     * @throws Exception If the string coordinate is not a valid coordinate.
+     */
     private int StringToInt(String toTransform) throws Exception {
         switch (toTransform) {
             case "a":
@@ -77,4 +96,5 @@ public class BoardService {
                 throw new Exception("Invalid input");
        }
     }
+
 }
