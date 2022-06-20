@@ -8,15 +8,15 @@ The purpose of this project was for me to have a clear indication of how I wante
 That contract is currently functional on MetisDAO's TestNet at: 0x1EE196BC220ac2F7Af99475d1FD0F3b6614c8CF1  
 ABI at the bottom of this file.
 
-The frontend for the application (WIP) is at: https://github.com/AroenvR/chesserz-frontend
+The frontend for the application (WIP) is at: https://github.com/AroenvR/chesserz-frontend  
 On the Heroku page: https://chesserz.herokuapp.com/chesserz-frontend/game/0x8012D8cA704c26D708546C4153715C8a8E939D44/0x6d485C5669Ff9056C12d50052077CfD95b93F0ac  
 (2 wallet addresses are necessary to view a specific game. These are 2 of my public 'throwaway' addresses.)
 
--- I think the frontend is currently broken, though. Check the last commit incase you end up checking it out and I haven't edited this ReadMe yet.
+-> If the frontend looks broken, make sure you're on the Metis Stardust Testnet.
 
 ---
 
-FenService SmartContract ABI:
+FenService SmartContract ABI:  
 "abi": [
     {
       "inputs": [
